@@ -21,7 +21,7 @@ def find_fks(from_model, to_model, fk_name=None):
     fkeys = [x for x in from_model._meta.fields if isinstance(x, models.ForeignKey)]
 
     # filter out all FKs not pointing to 'to_model'
-    fkeys = [x for x in fkeys if repr(remote_field_model(x)).lower() == repr(to_model).lower()]
+    fkeys = [x for x in fkeys if remote_field_model(x).lower() == to_model.__name__.lower()]
 
     # if 'fk_name' was given, filter out all FKs not matching that name, leaving
     # only one (or none)
